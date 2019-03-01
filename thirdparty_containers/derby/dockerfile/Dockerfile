@@ -14,7 +14,7 @@
 # AdoptOpenJDK jdk binary installed. Basic test dependent executions
 # are installed during the building process.
 #
-# Build example: `docker build -t adoptopenjdk-derby-test .`
+# Build example: `docker build -t adoptopenjdk-derby-test -f Dockerfile ../.`
 #
 # This Dockerfile builds image based on adoptopenjdk/openjdk8:latest.
 # If you want to build image based on other images, please use
@@ -42,8 +42,8 @@ RUN apt-get update \
 	tar \
 	wget
 
-# Installs Ant 1.10.2 as required by Derby 
-ENV ANT_VERSION 1.10.2 
+# Installs Ant 1.10.2 as required by Derby
+ENV ANT_VERSION 1.10.2
 ENV ANT_HOME=/opt/ant
 RUN wget --no-check-certificate --no-cookies https://archive.apache.org/dist/ant/binaries/apache-ant-${ANT_VERSION}-bin.tar.gz \
     && wget --no-check-certificate --no-cookies https://archive.apache.org/dist/ant/binaries/apache-ant-${ANT_VERSION}-bin.tar.gz.md5 \
@@ -53,7 +53,7 @@ RUN wget --no-check-certificate --no-cookies https://archive.apache.org/dist/ant
     && rm -f apache-ant-${ANT_VERSION}-bin.tar.gz \
     && rm -f apache-ant-${ANT_VERSION}-bin.tar.gz.md5
 RUN update-alternatives --install "/usr/bin/ant" "ant" "/opt/ant/bin/ant" 1 && \
-    update-alternatives --set "ant" "/opt/ant/bin/ant" 
+    update-alternatives --set "ant" "/opt/ant/bin/ant"
 
 VOLUME ["/java"]
 ENV JAVA_HOME=/java \
@@ -67,7 +67,7 @@ ENV DERBY_HOME ${WORKDIR}/derby
 COPY ./dockerfile/derby-test.sh /derby-test.sh
 
 # Clone Derby source.
-RUN git clone https://github.com/apache/derby.git 
+RUN git clone https://github.com/apache/derby.git
 
 ENTRYPOINT ["/bin/bash", "/derby-test.sh"]
 CMD ["--version"]

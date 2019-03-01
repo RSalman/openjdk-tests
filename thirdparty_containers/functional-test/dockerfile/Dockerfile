@@ -14,7 +14,7 @@
 # AdoptOpenJDK jdk binary installed. Basic test dependent executions
 # are installed during the building process.
 #
-# Build functional: `docker build -t adoptopenjdk-functional-test .`
+# Build functional: `docker build -t adoptopenjdk-functional-test -f Dockerfile ../.`
 #
 # This Dockerfile builds image based on adoptopenjdk/openjdk8:latest.
 # If you want to build image based on other images, please use
@@ -22,7 +22,7 @@
 #
 # Build functionaltest: `docker build --build-arg IMAGE_NAME=<image_name> --build-arg IMAGE_VERSION=<image_version > -t adoptopenjdk-functional-test .`
 
- 
+
 ARG SDK=openjdk8
 ARG IMAGE_NAME=adoptopenjdk/$SDK
 ARG IMAGE_VERSION=latest
@@ -62,10 +62,10 @@ ENV JAVA_HOME=/java \
     JAVA_TOOL_OPTIONS="-Dfile.encoding=UTF8"
 
 
-# This is the main script to run functional tests.  
+# This is the main script to run functional tests.
 COPY ./dockerfile/functional-test.sh /functional-test.sh
 
-# Clone the repo where the functional tests reside. 
+# Clone the repo where the functional tests reside.
 WORKDIR /
 RUN pwd
 

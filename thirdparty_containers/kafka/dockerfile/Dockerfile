@@ -14,14 +14,14 @@
 # AdoptOpenJDK jdk binary installed. Basic test dependent executions
 # are installed during the building process.
 #
-# Build example: `docker build -t adoptopenjdk-kafka-test .`
+# Build example: `docker build -t adoptopenjdk-kafka-test -f Dockerfile ../.`
 #
 # This Dockerfile builds image based on adoptopenjdk/openjdk8:latest.
 # If you want to build image based on other images, please use
 # `--build-arg list` to specify your base image
 #
 # Build example: `docker build --build-arg IMAGE_NAME=<image_name> --build-arg IMAGE_VERSION=<image_version >-t adoptopenjdk-kafka-test .`
- 
+
 ARG SDK=openjdk8
 ARG IMAGE_NAME=adoptopenjdk/$SDK
 ARG IMAGE_VERSION=latest
@@ -61,7 +61,7 @@ ENV JAVA_HOME=/java \
     PATH=/java/bin:$PATH \
     JAVA_TOOL_OPTIONS="-Dfile.encoding=UTF8"
 
-# This is the main script to run kafka tests. 
+# This is the main script to run kafka tests.
 COPY ./dockerfile/kafka-test.sh /kafka-test.sh
 
 # Clone the repo where kafka tests reside.

@@ -14,7 +14,7 @@
 # AdoptOpenJDK jdk binary installed. Basic test dependent executions
 # are installed during the building process.
 #
-# Build example: `docker build -t adoptopenjdk-example-test .`
+# Build example: `docker build -t adoptopenjdk-example-test -f Dockerfile ../.`
 #
 # This Dockerfile builds image based on adoptopenjdk/openjdk8:latest.
 # If you want to build image based on other images, please use
@@ -22,8 +22,8 @@
 #
 # Build example: `docker build --build-arg IMAGE_NAME=<image_name> --build-arg IMAGE_VERSION=<image_version >-t adoptopenjdk-example-test .`
 
-# This Dockerfile can be used as an example for external docker based tests. 
- 
+# This Dockerfile can be used as an example for external docker based tests.
+
 ARG SDK=openjdk8
 ARG IMAGE_NAME=adoptopenjdk/$SDK
 ARG IMAGE_VERSION=latest
@@ -49,7 +49,7 @@ ENV JAVA_HOME=/java \
     PATH=/java/bin:$PATH \
     JAVA_TOOL_OPTIONS="-Dfile.encoding=UTF8"
 
-# This is the main script to run example tests. Replace this with the script for your own third party test 
+# This is the main script to run example tests. Replace this with the script for your own third party test
 COPY ./dockerfile/example-test.sh /example-test.sh
 
 # Clone the repo where the 3rd party application code and tests reside.

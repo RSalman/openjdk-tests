@@ -14,7 +14,7 @@
 # AdoptOpenJDK jdk binary installed. Basic test dependent executions
 # are installed during the building process.
 #
-# Build system: `docker build -t adoptopenjdk-system-test .`
+# Build system: `docker build -t adoptopenjdk-system-test -f Dockerfile ../.`
 #
 # This Dockerfile builds image based on adoptopenjdk/openjdk8:latest.
 # If you want to build image based on other images, please use
@@ -22,7 +22,7 @@
 #
 # Build systemtest: `docker build --build-arg IMAGE_NAME=<image_name> --build-arg IMAGE_VERSION=<image_version > -t adoptopenjdk-system-test .`
 
- 
+
 ARG SDK=openjdk8
 ARG IMAGE_NAME=adoptopenjdk/$SDK
 ARG IMAGE_VERSION=latest
@@ -63,10 +63,10 @@ VOLUME ["/java"]
 ENV  JAVA_TOOL_OPTIONS="-Dfile.encoding=UTF8"
 
 
-# This is the main script to run system tests.  
+# This is the main script to run system tests.
 COPY ./dockerfile/system-test.sh /system-test.sh
 
-# Clone the repo where the 3rd party application code and tests reside. 
+# Clone the repo where the 3rd party application code and tests reside.
 WORKDIR /
 RUN pwd
 
@@ -85,7 +85,7 @@ ENV SPEC=linux_x86-64_cmprssptrs
 ENV BUILD_LIST=systemtest
 
 RUN cd /openjdk-tests && \
-    ./get.sh -t /openjdk-tests  
+    ./get.sh -t /openjdk-tests
 
 # Generates test targets applicable to the platform, implementation and version
 RUN echo "Generating test targets applicable to the platform, implementation and version..." && \

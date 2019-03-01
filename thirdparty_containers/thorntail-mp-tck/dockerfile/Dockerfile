@@ -14,7 +14,7 @@
 # AdoptOpenJDK jdk binary installed. Basic test dependent executions
 # are installed during the building process.
 #
-# Build example: `docker build -t adoptopenjdk-thorntail-mp-tck .`
+# Build example: `docker build -t adoptopenjdk-thorntail-mp-tck -f Dockerfile ../.`
 #
 # This Dockerfile builds image based on adoptopenjdk/openjdk8:latest.
 # If you want to build image based on other images, please use
@@ -44,11 +44,11 @@ RUN apt-get update \
 	python3-pip python3-dev \
 	&& cd /usr/local/bin \
 	&& ln -s /usr/bin/python3 python \
-	&& pip3 install --upgrade pip 
+	&& pip3 install --upgrade pip
 
 WORKDIR /
 ENV THORNTAIL_HOME $WORKDIR
-	
+
 # Install Maven
 RUN mkdir -p /usr/share/maven \
 	&& cd /usr/share/maven \
@@ -65,8 +65,8 @@ ENV JAVA_HOME=/java \
 
 COPY ./dockerfile/thorntail-mp-tck.sh /thorntail-mp-tck.sh
 
-#Clone thorntail repo 
-RUN git clone git://github.com/thorntail/thorntail 
+#Clone thorntail repo
+RUN git clone git://github.com/thorntail/thorntail
 
 ENTRYPOINT ["/bin/bash", "/thorntail-mp-tck.sh"]
 CMD ["--version"]
