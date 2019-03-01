@@ -67,7 +67,7 @@ ENV DERBY_HOME ${WORKDIR}/derby
 COPY ./dockerfile/derby-test.sh /derby-test.sh
 
 # Clone Derby source.
-RUN git clone https://github.com/apache/derby.git
+RUN git clone https://github.com/apache/derby.git 
 
 ENTRYPOINT ["/bin/bash", "/derby-test.sh"]
 CMD ["--version"]
