@@ -39,12 +39,13 @@ java -version
 
 # Replace the following with the initial command lines that trigger execution of your test
 # For this example, we will simply compile and run the ExampleTest class
-cd /tpc-example
+cd /HeapFragger
 
 pwd
 
 set -e
-echo "Compile and execute example-test" && \
-javac src/net/adoptopenjdk/example/test/ExampleTest.java && \
-java -cp ./src net.adoptopenjdk.example.test.ExampleTest
+mvn package && \
+cd target && \
+echo "================ Running HeapFragger ===============" && \
+java -Xmx2G -Xms2G -Xmn1G -verbose:gc -Xtgc:parallel -javaagent:HeapFragger.jar="-a 128 -f 0.25 -s 512" org.heaputils.Idle -t 60000
 set +e

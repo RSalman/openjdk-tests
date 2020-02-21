@@ -42,7 +42,8 @@ RUN apt-get update \
 	make \
 	unzip \
 	vim \
-	wget
+	wget \
+	maven
 
 ENV  JAVA_TOOL_OPTIONS="-Dfile.encoding=UTF8"
 
@@ -52,7 +53,7 @@ COPY ./dockerfile/example-test.sh /example-test.sh
 # Clone the repo where the 3rd party application code and tests reside.
 WORKDIR /
 RUN pwd
-RUN git clone https://github.com/smlambert/tpc-example.git
+RUN git clone https://github.com/giltene/HeapFragger.git
 
 ENTRYPOINT ["/bin/bash", "/example-test.sh"]
 CMD ["--version"]

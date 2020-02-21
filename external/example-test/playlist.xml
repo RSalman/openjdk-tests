@@ -31,5 +31,8 @@
 		<groups>
 			<group>external</group>
 		</groups>
+		<impls>
+			<impl>openj9</impl>
+		</impls>
 	</test>
 </playlist>
